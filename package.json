@@ -3,20 +3,35 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "keywords": [
+    "nodejs",
+    "js",
+    "javascript",
+    "express"
+  ],
+  "engines": {
+    "node": "12.7.0"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mmartsn/proba_node_server.git"
   },
-  "author": "Michael Martsynovskyi <mmartsn@gmail.com>",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/mmartsn/proba_node_server/issues"
   },
   "homepage": "https://github.com/mmartsn/proba_node_server#readme",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./bin/server.js"
+  },
   "dependencies": {
-    "express": "^4.17.1"
-  }
+    "express": "^4.17.1",
+    "http": "0.0.0",
+    "net": "^1.0.2"
+  },
+  "devDependencies": {
+    "mocha": "^6.2.0"
+  },
+  "author": "Michael Martsynovskyi <mmartsn@gmail.com>",
+  "license": "MIT"
 }
