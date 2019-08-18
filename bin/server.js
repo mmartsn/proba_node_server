@@ -1,60 +1,42 @@
+// bin/server.js
+'use strict';
+require('dotenv').config();
 const express = require('express');
 const app = express();
-const path = require('path');
-require('dotenv').config();
 
-// ========================================
-const APP_PORT =
-(process.env.NODE_ENV === 'test' ? process.env.TEST_APP_PORT : process.env.APP_PORT) || process.env.PORT || '3000';
-const APP_HOST = process.env.APP_HOST || '0.0.0.0';
-const APP_ENV = process.env.APP_ENV || 'development';
+app.use('/', require('../middlewares/app'));
 
-// ========================================
+// const MongoClient = require('mongodb').MongoClient;
 
-app.set('port', APP_PORT);
-app.set('host', APP_HOST);
-app.set('env', APP_ENV);
+// const URL = 'mongodb://localhost:27017';
 
-// ========================================
-app.locals.title = process.env.APP_NAME || 'Мое приложение';
-app.locals.version = process.env.APP_VERSION;
-app.locals.email = process.env.APP_EMAIL || 'me@myapp.com';
+// // Для подключения к серверу применяется метод connect():
+// MongoClient.connect(URL, {useNewUrlParser:true}, (err, client) => {
+//     // Если ошибки нет, можем взаимодействовать с сервером через объект client.
+//     console.log('Connected correctly to server.');      
+//     // Если при подключении возникли ошибки, то мы можем использовать значение err для получения ошибки.
+//     if (err) { 
+//         return console.log(err);
+//     }
+//     // Закрытие соединения с базой данных
+//     client.close();
+// });
+        
+// MongoClient.connect(URL, {useNewUrlParser:true}, (err, client) => {
+//   if (err) { 
+//     return console.log(err);
+//   }
+//   const db = client.db('peculiar');
+//   console.log('Connected correctly to server.');
+//   let collections = db.collection('posts');
+//   collections.insertOne({title: 'First Post', updated_at: new Date(),content:'Exercitationem in occaecati. Sed ut et inventore ipsa. Est officia autem harum. Fugiat voluptas facere.'}, (err, result) => {
+//     collections.find({title: 'First Post'}).toArray((err, docs) => {
+//       console.log(docs[0]);
+//       client.close();
+//     });
+//   });
+// });
 
-console.dir (app.locals.title)
-// => «Мое приложение»
-
-console.dir (app.locals.email)
-// => 'me@myapp.com'
-
-// ========================================
-app.use('/static', express.static(__dirname + '/../public/assets'));
-
-app.get("/", function(request, response){
-    response.sendFile(path.join(__dirname + '/../public/index.html'));
+app.listen(process.env.APP_PORT, () => {
+    console.log(`Server is listening on ${process.env.APP_PORT}`);
 });
-
-app.get("/about", function(request, response){
-    response.sendFile(path.join(__dirname + '/../public/about.html'));
-});
-
-app.get("/contact", function(request, response){
-    response.sendFile(path.join(__dirname + '/../public/contact.html'));
-});
-
-app.get('*', function(request, response){
-    response.status(404).send('What you want from me???');
-});
-
-
-
-  app.listen(app.get('port'), app.get('host'), (err) => {
-    if (err) {
-      return console.log('something bad happened', err);
-    }
-    console.log(`${app.locals.title} Version: ${app.locals.version} started at http://${app.get('host')}:${app.get('port')}`);
-});
-
-// module.exports = app;
-
-
-  

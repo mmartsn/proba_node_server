@@ -1,117 +1,25 @@
-// routes/web1.js по Никонову
+// routes/web.js
 const express = require('express');
-const path = require('path');
-
 const router = new express.Router();
 
+// Общие обработчики
+
 router.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname + '/../public/index.html'));
-});
-  
-router.get('/about', function(req, res) {
-    res.sendFile(path.join(__dirname + '/../public/about.html'));
+    res.render('pages/home/index', { title: 'Me And My Cats Main Page', message: 'Hello there it is Me And My Cats Main Page!'});
 });
 
-router.get('/contact', function(req, res) {
-    res.sendFile(path.join(__dirname + '/../public/contact.html'));
+router.get('/about', (req, res) => {
+    res.render('pages/about/index', { 
+        title: 'About Me And My Cats', 
+        message: 'Hello there Pug Layout!'
+    });
 });
-router.get('/500', function(req, res) {
-    res.sendFile(path.join(__dirname + '/../public/500.html'));
-});
-
+ 
+// Обработка ошибки 404
 router.get('/errors', function(req, res) {
-    res.sendFile(path.join(__dirname + '/../public/errors.html'));
+    res.render('pages/errors/index', { 
+        title: 'Page Not Found'
+    });
 });
-
-// маршрут на основе шаблонов строк.
-
-// маршрут сопоставляет acd и abcd.
-router.get('/ab?cd', (req, res) => {
-    res.send('ab?cd');
-});
-
-// маршрут сопоставляет abcd, abbcd, abbbcd
-router.get('/ab+cd', (req, res) => {
-    res.send('ab+cd');
-});
-
-// маршрут сопоставляет abcd, abxcd, abRABDOMcd, ab123cd и т.д.
-router.get('/ab*cd', function(req, res) {
-    res.send('ab*cd');
-});
-   
-// маршрут сопоставляет /abe и /abcde.
-router.get('/ab(cd)?e', function(req, res) {
-   res.send('ab(cd)?e');
-});
-
-
-
-// маршрут сопоставляет butterfly и dragonfly, но не butterflyman, dragonfly man и т.д.
-
-router.get(/.*fly$/, function(req, res) {
-    res.send('/.*fly$/');
-});
-   
-// Одна функция обратного вызова может обрабатывать один маршрут. 
-
-router.get('/example/a', function (req, res) {
- res.send('Hello from A!');
-});
-   
-// Один маршрут может обрабатываться несколькими функциями обратного вызова (обязательно укажите объект next). Например:
-router.get('/example/b', function (req, res, next) {
- console.log('the response will be sent by the next function ...');
- next();
-}, function (req, res) {
- res.send('Hello from B!');
-});
-
-// Массив функций обратного вызова может обрабатывать один маршрут. 
-
-var cb0 = function (req, res, next) {
- console.log('CB0');
- next();
-}
-
-var cb1 = function (req, res, next) {
- console.log('CB1');
- next();
-}
-
-var cb2 = function (req, res) {
-    res.send('Hello from C!');
-}
-   
-router.get('/example/c', [cb0, cb1, cb2]);
-   
-// Маршрут может обрабатываться сочетанием независимых функций и массивов функций. Например:
-
-var cb0 = function (req, res, next) {
- console.log('CB0');
- next();
-}
-
-var cb1 = function (req, res, next) {
- console.log('CB1');
- next();
-}
-
-router.get('/example/d', [cb0, cb1], function (req, res, next) {
-    console.log('the response will be sent by the next function ...');
-    next();
-}, function (req, res) {
-    res.send('Hello from D!');
-});
-
-// маршрут сопоставляет любой элемент с “a” в имени маршрута.
-
-// router.get(/a/, function(req, res) {
-//     res.send('/a/');
-// });
-
-// router.get('/*', function(req, res) {
-//    res.status(404).end("<h1>What you want from me???</h1>");
-// }); // у нас уже есть ehandler,  поэтому универсальный маршрут тут уже не нужен
 
 module.exports = router;
