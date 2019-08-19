@@ -22,12 +22,22 @@
   "homepage": "https://github.com/mmartsn/proba_node_server#readme",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./bin/server.js"
+    "start": "node ./bin/server.js",
+    "dev": "nodemon ./bin/server.js --config nodemon.json"
   },
   "dependencies": {
+    "dotenv": "^8.1.0",
+    "errorhandler": "^1.5.1",
     "express": "^4.17.1",
-    "http": "0.0.0",
-    "net": "^1.0.2"
+    "express-handlebars": "^3.1.0",
+    "hbs": "^4.0.4",
+    "mongodb": "^3.3.0-beta2",
+    "mongoose": "^5.6.9",
+    "morgan": "^1.9.1",
+    "node-notifier": "^5.4.1",
+    "pug": "^2.0.4",
+    "winston": "^3.2.1",
+    "winston-daily-rotate-file": "^3.10.0"
   },
   "devDependencies": {
     "mocha": "^6.2.0"
