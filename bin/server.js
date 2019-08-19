@@ -6,9 +6,11 @@ const app = express();
 
 app.use('/', require('../middlewares/app'));
 
-// const MongoClient = require('mongodb').MongoClient;
+//  ДАЛЕЕ ЗАКОММЕНТИРОВАНЫ ПРОВЕРКИ НА СОЕДИНЕНИЕ С БАЗОЙ
 
-// const URL = 'mongodb://localhost:27017';
+//  const MongoClient = require('mongodb').MongoClient;
+
+//  const URL = 'mongodb://localhost:27017';
 
 // // Для подключения к серверу применяется метод connect():
 // MongoClient.connect(URL, {useNewUrlParser:true}, (err, client) => {
